@@ -17,6 +17,7 @@ TYPE_OF_KPP = {
 
 
 class Car(models.Model):
+    """Модель автомобиля"""
     class Meta:
         verbose_name = 'Автомобиль'
         verbose_name_plural = 'Автомобили'

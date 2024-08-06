@@ -6,6 +6,7 @@ from automobile.models import Car
 
 
 class CarSerializer(serializers.Serializer):
+    """Сериализатор для модели автомобиля"""
     brand = serializers.CharField(max_length=127, allow_null=False, allow_blank=False, required=True)
     model = serializers.CharField(max_length=127, allow_null=False, allow_blank=False, required=True)
     year = serializers.IntegerField(allow_null=False, required=True)
@@ -15,10 +16,11 @@ class CarSerializer(serializers.Serializer):
     price = serializers.IntegerField(allow_null=False, required=True)
 
     def create(self, validated_data):
-        print(validated_data)
+        """Метод для создания объекта через сериализатор"""
         return Car.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
+        """Метод для обновления отдельных полей объекта через сериализатор"""
         instance.brand = validated_data.get('brand', instance.brand)
         instance.model = validated_data.get('model', instance.model)
         instance.year = validated_data.get('year', instance.year)
@@ -30,6 +32,7 @@ class CarSerializer(serializers.Serializer):
         return instance
 
     def validate_year(self, value):
+        """Метод для валидации года"""
         now_year = datetime.datetime.now().year
 
         if value < 1940:
@@ -40,24 +43,28 @@ class CarSerializer(serializers.Serializer):
         return value
 
     def validate_fuel_type(self, value):
+        """Метод для валидации типа топлива"""
         if value not in ['бензин', 'дизель', 'электричество', 'гибрид']:
             raise serializers.ValidationError('Топливом должен быть элемент из списка: бензин, дизель, электричество, гибрид')
 
         return value
 
     def validate_transmission(self, value):
+        """Метод для валидации типа КПП"""
         if value not in ['механическая', 'автоматическая', 'вариатор', 'робот']:
             raise serializers.ValidationError('КПП должен быть элемент из списка: механическая, автоматическая, вариатор, робот')
 
         return value
 
     def validate_mileage(self, value):
+        """Метод для валидации пробега"""
         if value < 0:
             raise serializers.ValidationError('Пробег не может быть отрицательным')
 
         return value
 
     def validate_price(self, value):
+        """Метод для валидации цены"""
         if value < 0:
             raise serializers.ValidationError('Цена не может быть отрицательной')
 

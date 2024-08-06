@@ -60,7 +60,6 @@ class Cars(APIView, PaginationHandlerMixin):
 
         for key, value in request.query_params.items():
             if key not in ['page_size', 'page']:
-                print(key)
                 if key in ['mileage_min', 'price_min']:
                     filtering_fields[key[:-4] + '__gte'] = value
                 elif key in ['mileage_max', 'price_max']:
