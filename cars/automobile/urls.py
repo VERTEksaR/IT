@@ -1,13 +1,13 @@
 from django.urls import path
 
 from automobile.views import (
-    CarsForm,
-    CarsList,
+    Cars,
+    CarItem
 )
 
 app_name = "automobiles"
 
 urlpatterns = [
-    path('create/', CarsForm.as_view(), name='index'),
-    path('cars/', CarsList.as_view()),
+    path('cars/', Cars.as_view()),
+    path('cars/<int:car_pk>/', CarItem.as_view()),
 ]
