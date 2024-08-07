@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'automobile.apps.AutomobileConfig',
+    'users.apps.UsersConfig',
 
     'rest_framework',
     'drf_yasg',

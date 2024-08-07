@@ -7,6 +7,7 @@ from automobile.models import Car
 
 class CarSerializer(serializers.Serializer):
     """Сериализатор для модели автомобиля"""
+    id = serializers.ReadOnlyField()
     brand = serializers.CharField(max_length=127, allow_null=False, allow_blank=False, required=True)
     model = serializers.CharField(max_length=127, allow_null=False, allow_blank=False, required=True)
     year = serializers.IntegerField(allow_null=False, required=True)

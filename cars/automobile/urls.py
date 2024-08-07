@@ -8,6 +8,6 @@ from automobile.views import (
 app_name = "automobiles"
 
 urlpatterns = [
-    path('cars/', Cars.as_view()),
+    path('cars/', Cars.as_view(), name='cars'),
     path('cars/<int:car_pk>/', CarItem.as_view()),
 ]

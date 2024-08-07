@@ -2,6 +2,7 @@ from typing import Dict
 
 from drf_yasg.utils import swagger_auto_schema
 
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework.request import Request
@@ -14,7 +15,8 @@ from automobile.paginations import CustomPagination, PaginationHandlerMixin
 
 
 class Cars(APIView, PaginationHandlerMixin):
-    # permission_classes = (IsAuthenticated,)
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
     pagination_class = CustomPagination
 
     @swagger_auto_schema(
@@ -71,6 +73,9 @@ class Cars(APIView, PaginationHandlerMixin):
 
 
 class CarItem(APIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
     @swagger_auto_schema(
         operation_summary='Получение данных о конкретном автомобиле',
         responses={200: CarSerializer, 404: 'Объект с таким id отсутствует'}
