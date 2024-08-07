@@ -2,6 +2,7 @@
 ---
 
 # Стек
+- Python v. 3.12
 - Django (Django Rest Framework)
 - SQLite
 ---
